@@ -17,13 +17,13 @@ export default {
 
     Card
   },
-  data() {
+  data () {
     return {
-      events: {}
+      events: []
     };
   },
   methods: {
-    getHomeInfo() {
+    getHomeInfo () {
       axios
         .get("https://i.snssdk.com/search/api/study?keyword=css&offset=0")
         .then(this.getHomeInfoSucc)
@@ -31,13 +31,12 @@ export default {
           console.log("there is an error", error);
         });
     },
-    getHomeInfoSucc(res) {
-      this.events = res.data;
-
+    getHomeInfoSucc (res) {
+      this.events = res.data.data;
       console.log(this.events);
     }
   },
-  mounted() {
+  mounted () {
     this.lastCity = this.city;
     this.getHomeInfo();
   }

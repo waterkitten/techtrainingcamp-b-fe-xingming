@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h1>信息列表</h1>
+  <div class="text">
+
     <Card v-for="event in events"
           :key="event.title"
           :event="event" />
@@ -15,12 +15,14 @@ export default {
     Card
   },
   props: {
-    events: { type: Object, required: true }
+    events: { type: Array, required: true }
   },
-  data () {
 
-  }
 };
 </script>
 
-<style></style>
+<style>
+.text {
+  text-align: center;
+}
+</style>

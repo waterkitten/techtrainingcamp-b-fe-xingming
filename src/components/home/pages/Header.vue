@@ -5,22 +5,102 @@
         &#xe624;
       </div>
     </div>
+    <!-- 搜索框 -->
     <input class="header-search"
            type="text"
-           placeholder="输入信息" />
+           placeholder="输入信息"
+           v-model="keyword" />
     <span class="iconfont arrow-icon">
       &#xe632;
-      <button>搜索</button>
+      <button> 搜索 </button>
     </span>
+    <!-- 内容渲染 -->
+    <div class="search-content"
+         ref="header-search"
+         v-show="keyword">
+      <ul>
 
-    <div class="header-right">
-      北京<span class="iconfont">
-        &#xe65c;
-      </span>
+        <li class="search-item border-bottom"
+            v-for="(item,index) in list"
+            :key="index"
+            @click="HandleCity(city)">{{item}}</li>
+        <li class="search-item border-bottom"
+            v-show="hasEvent">
+          没有匹配到数据
+        </li>
+
+      </ul>
+
     </div>
+
   </div>
 </template>
-<script></script>
+<script>
+import axios from "axios";
+export default {
+  name: "Header",
+  data () {
+    return {
+      keyword: '',
+      timer: null,
+      list: [],
+      value: [],
+      hasResult: false,
+
+    }
+  },
+  computed: {
+    hasEvent () {
+      return !this.list.length
+    }
+  },
+  methods: {
+
+    getResult (url) {
+      return new Promise((resolve, reject) => {
+        axios.get(url)
+          .then((url) => {
+            resolve(url.data.data)
+          })
+      })
+
+    }
+
+  },
+
+  watch: {
+    keyword: function () {
+      const result = []
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      if (!this.keyword) {
+        this.list = []
+        return
+      }
+      this.timer = setTimeout(() => {
+
+        this.getResult(`https://i.snssdk.com/search/api/sug/?keyword=${this.keyword}`).then(res => {
+          console.log(res)
+          for (const item of res) {
+            result.push(item.keyword)
+          }
+          this.list = result
+        })
+
+
+
+
+      }, 600)
+
+
+    }
+  }
+
+
+}
+
+</script>
 <style scoped lang="stylus">
 /* 局部 */
 @import '~css/var.stylus'
@@ -36,7 +116,7 @@
     font-size 0.4rem
 .header-left
   width 0.4rem
-  padding 0 0.2rem
+  padding 0.6 0.6rem
   text-align center
   font-weight bold
 .header-search
@@ -47,12 +127,27 @@
   height 0.6rem
   margin 0.14rem 0
   border-radius 0.09rem
-  color #e4e7ea
-  padding-left 0.2rem
-.header-right
-  font-size 0.28rem
-  padding 0 0.2rem
+  color black
+  padding-left 0.3rem
 .arrow-iconfon
-  margin-left -0.04rem
+  margin-left -0.3rem
   font-size 0.24rem
+.search-content
+  overflow hidden
+  background #eee
+  position absolute
+  top 0.99rem
+  left 0
+  right 0
+  z-index 1
+  bottom 0
+  .search-item
+    line-height 0.62rem
+    padding-left 0.2rem
+    color #666
+    background #fff
+    box-shadow 0 0 1px 1px black
+    font-size 15px
+    margin 8px
+    padding 8px
 </style>
