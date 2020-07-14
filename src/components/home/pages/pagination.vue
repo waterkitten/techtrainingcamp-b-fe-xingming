@@ -39,6 +39,7 @@ export default {
     },
     getHomeInfoSucc(res) {
       this.events = res.data.data;
+      this.$emit("child-say", this.events);
       console.log(this.events);
     }
   },

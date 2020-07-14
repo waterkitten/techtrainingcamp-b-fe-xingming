@@ -1,8 +1,8 @@
 <template>
   <div class="text">
-    <Card v-for="event in events" :key="event.title" :event="event" />
+    <Card v-for="event in list" :key="event.title" :event="event" />
     <!-- 跳转 -->
-    <Pagination />
+    <Pagination @child-say="listenToMyPage" />
   </div>
 </template>
 
@@ -15,11 +15,31 @@ export default {
     Card,
     Pagination
   },
-
   props: {
     events: { type: Array, required: true }
   },
-  methods: {}
+  data() {
+    return {
+      list: []
+    };
+  },
+  created() {
+    this.list = this.events;
+  },
+  computed: {
+    EventsInit() {
+      if (list !== []) {
+        return this.list;
+      }
+      return this.events;
+    }
+  },
+
+  methods: {
+    listenToMyPage(something) {
+      this.list = something;
+    }
+  }
 };
 </script>
 
