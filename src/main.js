@@ -3,10 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import Vuetify from 'vuetify'
-import vuetify from '@/plugins/vuetify'
-Vue.use(Vuetify)
-
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import store from './store'
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 // js-300ms
 import FastClick from 'fastclick'
@@ -19,6 +19,7 @@ import 'css/iconfont.css'
 new Vue({
   el: '#app',
   router,
+  store,
   components: {
     App
   },

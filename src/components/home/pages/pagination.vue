@@ -1,0 +1,57 @@
+<template>
+  <div class="block">
+    <span class="demonstration">直接前往</span>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page.sync="currentPage3"
+      :page-size="10"
+      layout="prev, pager, next, jumper"
+      :total="267"
+    >
+    </el-pagination>
+  </div>
+</template>
+<script>
+import axios from "axios";
+export default {
+  methods: {
+    handleSizeChange(val) {
+      this.currentRow = val;
+      console.log(`每页 ${this.currentRow} 条`);
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val;
+      console.log(`当前页: ${this.currentPage}`);
+      this.getHomeInfo();
+    },
+    // 发送请求
+    getHomeInfo() {
+      axios
+        .get(
+          "https://i.snssdk.com/search/api/study?keyword=css&offset=" +
+            this.currentPage
+        )
+        .then(this.getHomeInfoSucc)
+        .catch(error => {
+          console.log("there is an error", error);
+        });
+    },
+    getHomeInfoSucc(res) {
+      this.events = res.data.data;
+      console.log(this.events);
+    }
+  },
+  data() {
+    return {
+      currentPage: 1,
+      currentRow: 1,
+      list: [],
+      currentPage1: 5,
+      currentPage2: 5,
+      currentPage3: 5,
+      currentPage4: 4
+    };
+  }
+};
+</script>

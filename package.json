@@ -13,6 +13,7 @@
     "axios": "^0.19.2",
     "better-scroll": "^1.15.2",
     "electron-builder": "^22.7.0",
+    "element-ui": "^2.13.2",
     "fastclick": "^1.0.6",
     "less": "^3.11.3",
     "less-loader": "^4.0.3",
@@ -20,7 +21,9 @@
     "stylus-loader": "^3.0.2",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuetify": "^2.3.3"
+    "vuejs-paginate": "^2.1.0",
+    "vuetify": "^2.3.3",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
