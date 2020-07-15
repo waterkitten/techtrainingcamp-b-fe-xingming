@@ -23,7 +23,7 @@ export default {
       list: []
     };
   },
-  created() {
+  mounted() {
     this.list = this.events;
   },
   computed: {

@@ -12,7 +12,8 @@
             <span class="writer">{{ event.user_name }}</span> &nbsp;&nbsp;
             <span class="comment_count">评论&nbsp;{{ event.comment_count }}</span>
             <span class="datetime">{{ event.create_time }}</span>
-
+            <hr>
+            <span id="description">{{event.description}}</span>
           </div>
 
         </div>
@@ -46,6 +47,7 @@ export default {
   position: relative;
   margin: 5px;
   padding-bottom: 0.15rem;
+  box-shadow: 0 0 9px 2px black;
   .borderBottom(1px, #ccc);
   .title {
     font-size: 16px;
@@ -54,5 +56,17 @@ export default {
     padding-top: 0.2rem;
     padding-bottom: 0.15rem;
   }
+  .writer {
+    color: rgb(202, 62, 86);
+  }
+  .comment_count {
+    color: rgb(202, 62, 86);
+  }
+  .datetime {
+    color: rgb(125, 155, 155);
+  }
+}
+#description {
+  color: rgb(56, 95, 168);
 }
 </style>

@@ -6,28 +6,27 @@
       </div>
     </div>
     <!-- 搜索框 -->
-    <input
-      class="header-search"
-      type="text"
-      placeholder="输入信息"
-      v-model="keyword"
-    />
+    <input class="header-search"
+           type="text"
+           placeholder="输入信息"
+           v-model="keyword" />
     <span class="iconfont arrow-icon">
       &#xe632;
       <button>搜索</button>
     </span>
     <!-- 内容渲染 -->
-    <div class="search-content" ref="header-search" v-show="keyword">
+    <div class="search-content"
+         ref="header-search"
+         v-show="keyword">
       <ul>
-        <li
-          class="search-item border-bottom"
-          v-for="(item, index) in list"
-          :key="index"
-          @click="HandleCity(city)"
-        >
+        <li class="search-item border-bottom"
+            v-for="(item, index) in list"
+            :key="index"
+            @click="HandleCity(city)">
           {{ item }}
         </li>
-        <li class="search-item border-bottom" v-show="hasEvent">
+        <li class="search-item border-bottom"
+            v-show="hasEvent">
           没有匹配到数据
         </li>
       </ul>
@@ -39,7 +38,7 @@ import axios from "axios";
 
 export default {
   name: "Header",
-  data() {
+  data () {
     return {
       keyword: "",
       timer: null,
@@ -50,12 +49,12 @@ export default {
   },
 
   computed: {
-    hasEvent() {
+    hasEvent () {
       return !this.list.length;
     }
   },
   methods: {
-    getResult(url) {
+    getResult (url) {
       return new Promise((resolve, reject) => {
         axios.get(url).then(url => {
           resolve(url.data.data);
@@ -65,7 +64,7 @@ export default {
   },
 
   watch: {
-    keyword: function() {
+    keyword: function () {
       const result = [];
       if (this.timer) {
         clearTimeout(this.timer);
@@ -98,6 +97,7 @@ export default {
   background $bgColor
   font-size 0.36rem
   color $textColor
+  padding 5px 0px 0px 0px
   display flex
   .back-icon
     text-align center
@@ -114,7 +114,7 @@ export default {
   line-height 0.6rem
   height 0.6rem
   margin 0.14rem 0
-  border-radius 0.09rem
+  border-radius 0.69rem
   color black
   padding-left 0.3rem
 .arrow-iconfon
