@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HomeHeader />
+    <HomeHeader @accept-keyword="listenToKeyword" />
     <Content :events="events" />
   </div>
 </template>
@@ -17,13 +17,13 @@ export default {
 
     Card
   },
-  data() {
+  data () {
     return {
       events: []
     };
   },
   methods: {
-    getHomeInfo() {
+    getHomeInfo () {
       axios
         .get("https://i.snssdk.com/search/api/study?keyword=css&offset=0")
         .then(this.getHomeInfoSucc)
@@ -31,12 +31,26 @@ export default {
           console.log("there is an error", error);
         });
     },
-    getHomeInfoSucc(res) {
+    getHomeInfoSucc (res) {
       this.events = res.data.data;
       console.log(this.events);
+    },
+    getKeyWord (something) {
+      axios
+        .get(`https://i.snssdk.com/search/api/study?keyword=${something}&offset=0 `)
+        .then(this.getHomeInfoSucc)
+        .catch(error => {
+          console.log("there is an error", error);
+        });
+    },
+
+    listenToKeyword (something) {
+      console.log(something)
+      getKeyWord(something)
+
     }
   },
-  mounted() {
+  mounted () {
     this.getHomeInfo();
   }
 };

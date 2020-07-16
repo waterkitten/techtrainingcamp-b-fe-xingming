@@ -40,9 +40,16 @@ export default {
   height: 100%;
   background-color: red;
 }
+#description:hover {
+  transform: scale(1.2);
+  background-color: rgb(109, 176, 214);
+}
+p:hover {
+  transform: scale(1.2);
+}
 
 .newsDetaile {
-  width: 94%;
+  width: 97%;
   display: block;
   position: relative;
   margin: 5px;

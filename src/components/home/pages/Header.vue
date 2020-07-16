@@ -19,10 +19,10 @@
          ref="header-search"
          v-show="keyword">
       <ul>
-        <li class="search-item border-bottom"
+        <li class="search-item border-"
             v-for="(item, index) in list"
             :key="index"
-            @click="HandleCity(city)">
+            @click="HandleItem(item)">
           {{ item }}
         </li>
         <li class="search-item border-bottom"
@@ -60,11 +60,17 @@ export default {
           resolve(url.data.data);
         });
       });
+    },
+    HandleItem (item) {
+
+      this.keyword = item
+      // this.$emit("accept-keyword", this.keyword)
     }
   },
 
   watch: {
     keyword: function () {
+
       const result = [];
       if (this.timer) {
         clearTimeout(this.timer);
@@ -92,16 +98,29 @@ export default {
 /* 局部 */
 @import '~css/var.stylus'
 .header
-  width 100%
+  animation-name colorful
+  animation-duration 4s
+  animation-play-state running
+  animation-iteration-count 999
+  width 99%
   line-height 0.88rem
   background $bgColor
   font-size 0.36rem
   color $textColor
   padding 5px 0px 0px 0px
   display flex
-  .back-icon
-    text-align center
-    font-size 0.4rem
+@keyframes colorful
+  0%
+    background-color pink
+  50%
+    background-color green
+  75%
+    background-color red
+  100%
+    background-color yellow
+.back-icon
+  text-align center
+  font-size 0.4rem
 .header-left
   width 0.4rem
   padding 0.6 0.6rem
@@ -128,7 +147,7 @@ export default {
   left 0
   right 0
   z-index 1
-  bottom 0
+  bottom 2
   .search-item
     line-height 0.62rem
     padding-left 0.2rem

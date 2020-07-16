@@ -1,6 +1,15 @@
 <template>
   <div class="text">
-    <Card v-for="event in list" :key="event.title" :event="event" />
+    <!-- 第二次开始，就开始用其他数据渲染 -->
+    <Card v-show="sure"
+          v-for="event in list"
+          :key="event.title"
+          :event="event" />
+    <!-- 第一次加载使用主页传来的默认数据 -->
+    <Card v-show="!sure"
+          v-for="event in events"
+          :key="event.link_url"
+          :event="event" />
     <!-- 跳转 -->
     <Pagination @child-say="listenToMyPage" />
   </div>
@@ -18,16 +27,17 @@ export default {
   props: {
     events: { type: Array, required: true }
   },
-  data() {
+  data () {
     return {
-      list: []
+      list: [],
+      sure: false
     };
   },
-  mounted() {
-    this.list = this.events;
+  mounted () {
+    this.list = [];
   },
   computed: {
-    EventsInit() {
+    EventsInit () {
       if (list !== []) {
         return this.list;
       }
@@ -36,8 +46,9 @@ export default {
   },
 
   methods: {
-    listenToMyPage(something) {
+    listenToMyPage (something) {
       this.list = something;
+      this.sure = true
     }
   }
 };
@@ -46,5 +57,6 @@ export default {
 <style>
 .text {
   text-align: center;
+  height: 100%;
 }
 </style>
