@@ -64,7 +64,8 @@ export default {
     HandleItem (item) {
 
       this.keyword = item
-      // this.$emit("accept-keyword", this.keyword)
+      this.$emit("accept-keyword", this.keyword)
+      this.keyword = ""
     }
   },
 

@@ -13,6 +13,9 @@
 <script>
 import axios from "axios";
 export default {
+  props: {
+    keys: { type: String, required: true }
+  },
   methods: {
     handleSizeChange (val) {
       this.currentRow = val;
@@ -27,13 +30,14 @@ export default {
     getHomeInfo () {
       axios
         .get(
-          "https://i.snssdk.com/search/api/study?keyword=css&offset=" +
+          "https://i.snssdk.com/search/api/study?keyword=" + this.keys + "&offset=" +
           this.currentPage
         )
         .then(this.getHomeInfoSucc)
         .catch(error => {
           console.log("there is an error", error);
         });
+      console.log(this.keys)
     },
     getHomeInfoSucc (res) {
       this.events = res.data.data;

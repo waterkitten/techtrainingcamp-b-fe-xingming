@@ -1,7 +1,8 @@
 <template>
   <div>
     <HomeHeader @accept-keyword="listenToKeyword" />
-    <Content :events="events" />
+    <Content :events="events"
+             :keys="keys" />
   </div>
 </template>
 <script>
@@ -19,13 +20,14 @@ export default {
   },
   data () {
     return {
-      events: []
+      events: [],
+      keys: "css"
     };
   },
   methods: {
     getHomeInfo () {
       axios
-        .get("https://i.snssdk.com/search/api/study?keyword=css&offset=0")
+        .get(`https://i.snssdk.com/search/api/study?keyword=${this.keys}&offset=0`)
         .then(this.getHomeInfoSucc)
         .catch(error => {
           console.log("there is an error", error);
@@ -33,20 +35,26 @@ export default {
     },
     getHomeInfoSucc (res) {
       this.events = res.data.data;
+
       console.log(this.events);
     },
-    getKeyWord (something) {
+    //   getKeyWord (something) {
+    //   axios
+    //     .get("https://i.snssdk.com/search/api/study?keyword=css&offset=0")
+    //     .then(this.getHomeInfoSucc)
+    //     .catch(error => {
+    //       console.log("there is an error", error);
+    //     });
+    // },
+    listenToKeyword (something) {
+      console.log(something)
+      this.keys = something;
       axios
-        .get(`https://i.snssdk.com/search/api/study?keyword=${something}&offset=0 `)
+        .get(`https://i.snssdk.com/search/api/study?keyword=${something}&offset=0`)
         .then(this.getHomeInfoSucc)
         .catch(error => {
           console.log("there is an error", error);
         });
-    },
-
-    listenToKeyword (something) {
-      console.log(something)
-      getKeyWord(something)
 
     }
   },

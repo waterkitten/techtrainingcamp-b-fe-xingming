@@ -11,7 +11,8 @@
           :key="event.link_url"
           :event="event" />
     <!-- 跳转 -->
-    <Pagination @child-say="listenToMyPage" />
+    <Pagination @child-say="listenToMyPage"
+                :keys="keys" />
   </div>
 </template>
 
@@ -25,7 +26,8 @@ export default {
     Pagination
   },
   props: {
-    events: { type: Array, required: true }
+    events: { type: Array, required: true },
+    keys: { type: String, required: true }
   },
   data () {
     return {
